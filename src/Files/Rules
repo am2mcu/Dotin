@@ -1,13 +1,15 @@
+=> CRUD :
+
 ---User---
-Get room list
-Request for room
-Get request states
+Get room list - R
+Request for room - U
+Get request states - R
 
 ---System Manager---
-Get room list
-Add room
-Remove room
+Get room list - R
+Add room - C
+Remove room - D
 
 ---Reserve Manager---
-Get request list
-Ack or Nak to request
+Get request list - R
+Ack or Nak to request - U
