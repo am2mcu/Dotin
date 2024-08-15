@@ -1,0 +1,13 @@
+---User---
+Get room list
+Request for room
+Get request states
+
+---System Manager---
+Get room list
+Add room
+Remove room
+
+---Reserve Manager---
+Get request list
+Ack or Nak to request
