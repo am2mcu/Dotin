@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9d18ab3c-6bd6-4df8-96a5-48ab04a3ac2c" name="Changes" comment="chore: init">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/MainApplication.java" afterDir="false" />
+    <list default="true" id="9d18ab3c-6bd6-4df8-96a5-48ab04a3ac2c" name="Changes" comment="feat!: remove Main class&#10;&#10;no usage">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -83,7 +82,28 @@
       <option name="project" value="LOCAL" />
       <updated>1723979732382</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="chore: init">
+      <created>1723980583870</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1723980583870</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: add MainApplication class">
+      <created>1723981257219</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1723981257219</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat!: remove Main class&#10;&#10;no usage">
+      <created>1723981330904</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1723981330904</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -99,6 +119,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="chore: init" />
-    <option name="LAST_COMMIT_MESSAGE" value="chore: init" />
+    <MESSAGE value="feat: add MainApplication class" />
+    <MESSAGE value="feat!: remove Main class&#10;&#10;no usage" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat!: remove Main class&#10;&#10;no usage" />
   </component>
 </project>
