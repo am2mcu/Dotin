@@ -19,7 +19,7 @@ public class CustomerHandler {
         return customerMap.values();
     }
 
-    public void addPerson(Customer customer) {
+    public void addCustomer(Customer customer) {
         customerMap.put(customer.getId(), customer);
     }
 }
