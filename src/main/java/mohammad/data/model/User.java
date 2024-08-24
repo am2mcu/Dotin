@@ -1,5 +1,8 @@
 package mohammad.data.model;
 
+import lombok.ToString;
+
+@ToString
 public class User {
     int id;
     String firstName;
