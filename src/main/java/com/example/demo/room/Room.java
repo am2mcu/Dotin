@@ -21,11 +21,9 @@ public class Room {
     private Long roomId;
     @Transient
     private int roomNumber;
-    private String status;
     private int capacity;
 
-    public Room(String status, int capacity) {
-        this.status = status;
+    public Room(int capacity) {
         this.capacity = capacity;
     }
 
