@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("rooms")
+//@RequestMapping("rooms")
 public class RoomController {
     private final RoomService roomService;
 
@@ -15,30 +15,25 @@ public class RoomController {
         this.roomService = roomService;
     }
 
-//    @GetMapping
-//    public List<Room> getRooms() {
-//        return roomService.getRooms();
-//    }
-
-    @GetMapping()
-    public List<Room> getAvailableRooms() {
-        return roomService.getAvailableRooms();
+    @GetMapping("/rooms")
+    public List<Room> getRooms() {
+        return roomService.getRooms();
     }
 
-    @PostMapping
+    @PostMapping("/rooms")
     public void addRoom(@RequestBody Room room) {
         roomService.addRoom(room);
     }
 
-    @DeleteMapping(path = "{roomId}")
-    public void deleteStudent(@PathVariable("roomId") Long roomId) {
+    @DeleteMapping("/rooms/{roomId}")
+    public void deleteRoom(@PathVariable("roomId") Long roomId) {
         roomService.deleteRoom(roomId);
     }
 
-    @PutMapping(path = "{roomId}")
+    @PutMapping("/rooms/{roomId}")
     public void updateRoom(
             @PathVariable("roomId") Long roomId,
-            @RequestParam(required = false) String status) {
-        roomService.updateRoom(roomId, status);
+            @RequestParam int capacity) {
+        roomService.updateRoom(roomId, capacity);
     }
 }

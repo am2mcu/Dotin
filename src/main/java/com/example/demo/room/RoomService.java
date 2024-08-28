@@ -20,10 +20,6 @@ public class RoomService {
         return roomRepository.findAll();
     }
 
-    public List<Room> getAvailableRooms() {
-        return roomRepository.findRoomByStatus("Available");
-    }
-
     public void addRoom(Room room) {
         Optional<Room> roomOptional = roomRepository.findRoomById(room.getRoomId());
         if (roomOptional.isPresent()) {
@@ -39,9 +35,8 @@ public class RoomService {
     }
 
     @Transactional
-    public void updateRoom(Long roomId, String status) {
+    public void updateRoom(Long roomId, int capacity) {
         Room room = roomRepository.findById(roomId).orElseThrow(() -> new IllegalStateException("Room does not exists!"));
-        if (status != null)
-            room.setStatus(status);
+        room.setCapacity(capacity);
     }
 }
