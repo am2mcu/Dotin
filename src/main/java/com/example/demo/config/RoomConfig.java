@@ -1,5 +1,7 @@
-package com.example.demo.room;
+package com.example.demo.config;
 
+import com.example.demo.model.Room;
+import com.example.demo.repo.RoomRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

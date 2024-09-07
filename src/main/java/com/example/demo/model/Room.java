@@ -1,4 +1,4 @@
-package com.example.demo.room;
+package com.example.demo.model;
 
 import lombok.*;
 

@@ -1,5 +1,8 @@
-package com.example.demo.room;
+package com.example.demo.controller;
 
+import com.example.demo.model.Reservation;
+import com.example.demo.model.Room;
+import com.example.demo.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,5 +38,15 @@ public class RoomController {
             @PathVariable("roomId") Long roomId,
             @RequestParam int capacity) {
         roomService.updateRoom(roomId, capacity);
+    }
+
+    @GetMapping("/reserved_rooms")
+    public List<Reservation> getReservedRooms() {
+        return roomService.getReservedRooms();
+    }
+
+    @PostMapping("/reserve_room/{roomId}")
+    public void reserveRoom(@PathVariable("roomId") Long roomId) {
+        roomService.reserveRoom(roomId);
     }
 }
