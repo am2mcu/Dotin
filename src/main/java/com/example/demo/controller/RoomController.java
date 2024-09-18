@@ -40,12 +40,12 @@ public class RoomController {
         roomService.updateRoom(roomId, capacity);
     }
 
-    @GetMapping("/reserved_rooms")
+    @GetMapping("/reservations")
     public List<Reservation> getReservedRooms() {
         return roomService.getReservedRooms();
     }
 
-    @PostMapping("/reserve_room/{roomId}")
+    @PostMapping("/reservations/{roomId}")
     public void reserveRoom(@PathVariable("roomId") Long roomId) {
         roomService.reserveRoom(roomId);
     }
