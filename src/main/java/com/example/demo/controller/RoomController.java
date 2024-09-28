@@ -11,6 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("rooms")
+@Tag(name = "room", description = "Access & modify rooms")
 public class RoomController {
     private final RoomService roomService;
 
@@ -19,11 +20,9 @@ public class RoomController {
         this.roomService = roomService;
     }
 
-    @Tag(name = "room", description = "Access & modify rooms")
     @Operation(
             summary = "Get rooms",
-            description = "Get all rooms properties",
-            tags = {"room"}
+            description = "Get all rooms properties"
     )
     @GetMapping()
     public List<Room> getRooms() {
@@ -32,8 +31,7 @@ public class RoomController {
 
     @Operation(
             summary = "Add room",
-            description = "Add a new room",
-            tags = {"room"}
+            description = "Add a new room"
     )
     @PostMapping()
     public void addRoom(@RequestBody Room room) {
@@ -42,8 +40,7 @@ public class RoomController {
 
     @Operation(
             summary = "Delete room",
-            description = "Delete an existing room",
-            tags = {"room"}
+            description = "Delete an existing room"
     )
     @DeleteMapping("/{roomId}")
     public void deleteRoom(@PathVariable("roomId") Long roomId) {
@@ -53,8 +50,7 @@ public class RoomController {
 
     @Operation(
             summary = "Modify room",
-            description = "Update a room properties",
-            tags = {"room"}
+            description = "Update a room properties"
     )
     @PutMapping("/{roomId}")
     public void updateRoom(

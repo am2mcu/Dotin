@@ -11,15 +11,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("reservations")
+@Tag(name = "reservation", description = "List & Modify reservations")
 public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
-    @Tag(name = "reservation", description = "List & Modify reservations")
     @Operation(
             summary = "Get reservations",
-            description = "Get all reserved rooms properties",
-            tags = {"reservation"}
+            description = "Get all reserved rooms properties"
     )
     @GetMapping()
     public List<Reservation> getReservedRooms() {
