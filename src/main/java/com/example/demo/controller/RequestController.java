@@ -34,6 +34,11 @@ public class RequestController {
         requestService.requestRoom(roomId);
     }
 
+    @DeleteMapping("/{requestId}")
+    public void deleteRequest(@PathVariable("requestId") Long requestId) {
+        requestService.deleteRequest(requestId);
+    }
+
     @Operation(
             summary = "Accept request",
             description = "Accept a room request"

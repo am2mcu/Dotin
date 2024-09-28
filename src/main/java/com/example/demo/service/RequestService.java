@@ -41,6 +41,16 @@ public class RequestService {
         requestRepository.save(new Request(room, user));
     }
 
+    public void deleteRequest(Long requestId) {
+        Request request = requestRepository.findById(requestId).orElseThrow(() -> {
+            logger.error("Request does not exists!");
+            throw new IllegalStateException("Request does not exists!");
+        });
+
+        logger.info("Request deleted");
+        requestRepository.deleteById(requestId);
+    }
+
     public void acceptRequest(Long requestId) {
         Request request = requestRepository.findById(requestId).orElseThrow(() -> {
             logger.error("Request does not exists!");
