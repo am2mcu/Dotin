@@ -19,10 +19,6 @@ import java.util.Optional;
 public class RoomService {
     private static final Logger logger = LoggerFactory.getLogger(RoomService.class);
     private final RoomRepository roomRepository;
-    @Autowired
-    private ReservationRepository reservationRepository;
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     public RoomService(RoomRepository roomRepository) {
@@ -61,23 +57,5 @@ public class RoomService {
         });
         logger.info("Room updated");
         room.setCapacity(capacity);
-    }
-
-    public List<Reservation> getReservedRooms() {
-        logger.info("Reserved rooms selected from DB");
-        return reservationRepository.findAll();
-    }
-    public void reserveRoom(Long roomId) {
-        Room room = roomRepository.findById(roomId).orElseThrow(() -> {
-            logger.error("Room does not exists!");
-            throw new IllegalStateException("Room does not exists!");
-        });
-        User user = userRepository.findById(1L).orElseThrow(() -> {
-            logger.error("User does not exists!");
-            throw new IllegalStateException("User does not exists!");
-        });
-
-        logger.info("Room reserved");
-        reservationRepository.save(new Reservation(room, user));
     }
 }
