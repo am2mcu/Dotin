@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@RequestMapping("rooms")
+@RequestMapping("rooms")
 public class RoomController {
     private final RoomService roomService;
 
@@ -26,7 +26,7 @@ public class RoomController {
             description = "Get all rooms properties",
             tags = {"room"}
     )
-    @GetMapping("/rooms")
+    @GetMapping()
     public List<Room> getRooms() {
         return roomService.getRooms();
     }
@@ -36,7 +36,7 @@ public class RoomController {
             description = "Add a new room",
             tags = {"room"}
     )
-    @PostMapping("/rooms")
+    @PostMapping()
     public void addRoom(@RequestBody Room room) {
         roomService.addRoom(room);
     }
@@ -46,7 +46,7 @@ public class RoomController {
             description = "Delete an existing room",
             tags = {"room"}
     )
-    @DeleteMapping("/rooms/{roomId}")
+    @DeleteMapping("/{roomId}")
     public void deleteRoom(@PathVariable("roomId") Long roomId) {
         roomService.deleteRoom(roomId);
     }
@@ -57,32 +57,10 @@ public class RoomController {
             description = "Update a room properties",
             tags = {"room"}
     )
-    @PutMapping("/rooms/{roomId}")
+    @PutMapping("/{roomId}")
     public void updateRoom(
             @PathVariable("roomId") Long roomId,
             @RequestParam int capacity) {
         roomService.updateRoom(roomId, capacity);
-    }
-
-    @Tag(name = "reservation", description = "List & Modify reservations")
-    @Operation(
-            summary = "Get reservations",
-            description = "Get all reserved rooms properties",
-            tags = {"reservation"}
-    )
-    @GetMapping("/reservations")
-    public List<Reservation> getReservedRooms() {
-        return roomService.getReservedRooms();
-    }
-
-    @Tag(name = "reservation", description = "List & Modify reservations")
-    @Operation(
-            summary = "Reserve room",
-            description = "Reserve a new room",
-            tags = {"reservation"}
-    )
-    @PostMapping("/reservations/{roomId}")
-    public void reserveRoom(@PathVariable("roomId") Long roomId) {
-        roomService.reserveRoom(roomId);
     }
 }
