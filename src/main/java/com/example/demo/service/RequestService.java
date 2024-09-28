@@ -40,4 +40,29 @@ public class RequestService {
         logger.info("Room requested");
         requestRepository.save(new Request(room, user));
     }
+
+    public void acceptRequest(Long requestId) {
+        Request request = requestRepository.findById(requestId).orElseThrow(() -> {
+            logger.error("Request does not exists!");
+            throw new IllegalStateException("Request does not exists!");
+        });
+
+        Room room = request.getRoom();
+        room.setStatus("Reserved");
+        roomRepository.save(room);
+        logger.info("Request accepted");
+
+        requestRepository.deleteById(requestId);
+        logger.info("Request removed");
+    }
+
+    public void declineRequest(Long requestId) {
+        Request request = requestRepository.findById(requestId).orElseThrow(() -> {
+            logger.error("Request does not exists!");
+            throw new IllegalStateException("Request does not exists!");
+        });
+
+        requestRepository.deleteById(requestId);
+        logger.info("Request removed");
+    }
 }

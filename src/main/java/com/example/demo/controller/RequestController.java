@@ -33,4 +33,22 @@ public class RequestController {
     public void requestRoom(@PathVariable("roomId") Long roomId) {
         requestService.requestRoom(roomId);
     }
+
+    @Operation(
+            summary = "Accept request",
+            description = "Accept a room request"
+    )
+    @PostMapping("/{requestId}/accept")
+    public void acceptRequest(@PathVariable("requestId") Long requestId) {
+        requestService.acceptRequest(requestId);
+    }
+
+    @Operation(
+            summary = "Decline request",
+            description = "Decline a room request"
+    )
+    @PostMapping("/{requestId}/decline")
+    public void declineRequest(@PathVariable("requestId") Long requestId) {
+        requestService.declineRequest(requestId);
+    }
 }
