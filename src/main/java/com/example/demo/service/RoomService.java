@@ -26,6 +26,16 @@ public class RoomService {
         return roomRepository.findAll();
     }
 
+    public List<Room> getAvailableRooms() {
+        logger.info("Available Rooms selected from DB");
+        return roomRepository.getAvailableRooms();
+    }
+
+    public List<Room> getReservedRooms() {
+        logger.info("Reserved Rooms selected from DB");
+        return roomRepository.getReservedRooms();
+    }
+
     public void addRoom(Room room) {
         Optional<Room> roomOptional = roomRepository.findRoomById(room.getRoomId());
         if (roomOptional.isPresent()) {
