@@ -25,8 +25,9 @@ public class Room {
 
     private String status;
 
-    public Room(int capacity) {
+    public Room(int capacity, String status) {
         this.capacity = capacity;
+        this.status = status;
     }
 
     public Integer getRoomNumber() {
