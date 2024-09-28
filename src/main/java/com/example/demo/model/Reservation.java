@@ -24,10 +24,10 @@ public class Reservation {
     )
     private Long reservationId;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "room_id")
     private Room room;
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
 
