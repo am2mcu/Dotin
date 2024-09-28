@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
+import com.example.demo.model.Request;
 import com.example.demo.model.Room;
 import com.example.demo.model.User;
+import com.example.demo.repo.RequestRepository;
 import com.example.demo.repo.ReservationRepository;
 import com.example.demo.repo.RoomRepository;
 import com.example.demo.repo.UserRepository;
@@ -13,20 +15,20 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ReservationService {
-    private static final Logger logger = LoggerFactory.getLogger(RoomService.class);
+public class RequestService {
+    private static final Logger logger = LoggerFactory.getLogger(RequestService.class);
+    @Autowired
+    private RequestRepository requestRepository;
     @Autowired
     private RoomRepository roomRepository;
     @Autowired
-    private ReservationRepository reservationRepository;
-    @Autowired
     private UserRepository userRepository;
 
-    public List<Reservation> getReservedRooms() {
-        logger.info("Reserved rooms selected from DB");
-        return reservationRepository.findAll();
+    public List<Request> getRequests() {
+        logger.info("Requests selected from DB");
+        return requestRepository.findAll();
     }
-    public void reserveRoom(Long roomId) {
+    public void requestRoom(Long roomId) {
         Room room = roomRepository.findById(roomId).orElseThrow(() -> {
             logger.error("Room does not exists!");
             throw new IllegalStateException("Room does not exists!");
@@ -36,7 +38,7 @@ public class ReservationService {
             throw new IllegalStateException("User does not exists!");
         });
 
-        logger.info("Room reserved");
-        reservationRepository.save(new Reservation(room, user));
+        logger.info("Room requested");
+        requestRepository.save(new Request(room, user));
     }
 }
