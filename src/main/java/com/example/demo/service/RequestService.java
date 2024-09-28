@@ -41,8 +41,13 @@ public class RequestService {
             throw new IllegalStateException("User does not exists!");
         });
 
-        logger.info("Room requested");
-        requestRepository.save(new Request(room, user));
+        if (room.getStatus().equals("Available")) {
+            logger.info("Room requested");
+            requestRepository.save(new Request(room, user));
+        } else {
+            logger.error("Selected room is occupied");
+            throw new IllegalStateException("Room occupied");
+        }
     }
 
     public void deleteRequest(Long requestId) {
