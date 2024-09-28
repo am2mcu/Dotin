@@ -1,9 +1,11 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Request;
+import com.example.demo.model.Reservation;
 import com.example.demo.model.Room;
 import com.example.demo.model.User;
 import com.example.demo.repo.RequestRepository;
+import com.example.demo.repo.ReservationRepository;
 import com.example.demo.repo.RoomRepository;
 import com.example.demo.repo.UserRepository;
 import org.slf4j.Logger;
@@ -18,6 +20,8 @@ public class RequestService {
     private static final Logger logger = LoggerFactory.getLogger(RequestService.class);
     @Autowired
     private RequestRepository requestRepository;
+    @Autowired
+    private ReservationRepository reservationRepository;
     @Autowired
     private RoomRepository roomRepository;
     @Autowired
@@ -60,10 +64,12 @@ public class RequestService {
         Room room = request.getRoom();
         room.setStatus("Reserved");
         roomRepository.save(room);
-        logger.info("Request accepted");
+
+        User user = request.getUser();
+        reservationRepository.save(new Reservation(room, user));
 
         requestRepository.deleteById(requestId);
-        logger.info("Request removed");
+        logger.info("Request removed from database");
     }
 
     public void declineRequest(Long requestId) {
