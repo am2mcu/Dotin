@@ -1,8 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Reservation;
-import com.example.demo.model.Room;
-import com.example.demo.service.RoomService;
+import com.example.demo.service.ReservationService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("reservations")
 public class ReservationController {
-    private final RoomService roomService;
-
     @Autowired
-    public ReservationController(RoomService roomService) {
-        this.roomService = roomService;
-    }
+    private ReservationService reservationService;
 
     @Tag(name = "reservation", description = "List & Modify reservations")
     @Operation(
@@ -28,7 +23,7 @@ public class ReservationController {
     )
     @GetMapping()
     public List<Reservation> getReservedRooms() {
-        return roomService.getReservedRooms();
+        return reservationService.getReservedRooms();
     }
 
     @Operation(
@@ -38,6 +33,6 @@ public class ReservationController {
     )
     @PostMapping("/{roomId}")
     public void reserveRoom(@PathVariable("roomId") Long roomId) {
-        roomService.reserveRoom(roomId);
+        reservationService.reserveRoom(roomId);
     }
 }
