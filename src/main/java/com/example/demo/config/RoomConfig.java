@@ -13,9 +13,9 @@ public class RoomConfig {
     @Bean
     CommandLineRunner commandLineRunner(RoomRepository roomRepository) {
         return args -> {
-            Room room1 = new Room(3);
-            Room room2 = new Room(2);
-            Room room3 = new Room(4);
+            Room room1 = new Room(3, "Available");
+            Room room2 = new Room(2, "Available");
+            Room room3 = new Room(4, "Available");
 
             roomRepository.saveAll(List.of(room1, room2, room3));
         };
