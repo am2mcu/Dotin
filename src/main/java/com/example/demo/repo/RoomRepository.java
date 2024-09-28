@@ -13,9 +13,9 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     @Query("SELECT r FROM Room r WHERE r.roomId = ?1")
     Optional<Room> findRoomById(Long roomId);
 
-    @Query("SELECT r FROM Room r WHERE r.status = Available")
+    @Query("SELECT r FROM Room r WHERE r.status = 'Available'")
     List<Room> getAvailableRooms();
 
-    @Query("SELECT r FROM Room r WHERE r.status = Reserved")
+    @Query("SELECT r FROM Room r WHERE r.status = 'Reserved'")
     List<Room> getReservedRooms();
 }
