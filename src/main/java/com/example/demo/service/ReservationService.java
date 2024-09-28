@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Reservation;
 import com.example.demo.model.Room;
 import com.example.demo.model.User;
 import com.example.demo.repo.ReservationRepository;
@@ -11,9 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ReservationService {

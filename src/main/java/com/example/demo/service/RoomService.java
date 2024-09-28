@@ -1,11 +1,7 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Reservation;
 import com.example.demo.model.Room;
-import com.example.demo.model.User;
-import com.example.demo.repo.ReservationRepository;
 import com.example.demo.repo.RoomRepository;
-import com.example.demo.repo.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

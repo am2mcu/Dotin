@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.Reservation;
 import com.example.demo.model.Room;
 import com.example.demo.service.RoomService;
 import io.swagger.v3.oas.annotations.Operation;

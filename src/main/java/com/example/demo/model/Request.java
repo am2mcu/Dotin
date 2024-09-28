@@ -25,8 +25,10 @@ public class Request {
     private Long requestId;
 
     @OneToOne
+    @JoinColumn(name = "room_id")
     private Room room;
-    @OneToOne()
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Request(Room room, User user) {

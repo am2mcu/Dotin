@@ -23,6 +23,8 @@ public class Room {
     private int roomNumber;
     private int capacity;
 
+    private String status;
+
     public Room(int capacity) {
         this.capacity = capacity;
     }
