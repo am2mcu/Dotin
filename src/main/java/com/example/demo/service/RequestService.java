@@ -4,7 +4,6 @@ import com.example.demo.model.Request;
 import com.example.demo.model.Room;
 import com.example.demo.model.User;
 import com.example.demo.repo.RequestRepository;
-import com.example.demo.repo.ReservationRepository;
 import com.example.demo.repo.RoomRepository;
 import com.example.demo.repo.UserRepository;
 import org.slf4j.Logger;
