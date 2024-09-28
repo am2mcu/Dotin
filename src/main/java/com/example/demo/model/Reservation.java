@@ -10,7 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "requests")
+@Table(name = "reservations")
 public class Reservation {
     @Id
     @SequenceGenerator(
