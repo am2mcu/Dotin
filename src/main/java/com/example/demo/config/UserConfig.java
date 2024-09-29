@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import com.example.demo.model.Customer;
 import com.example.demo.model.User;
 import com.example.demo.repo.UserRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -14,7 +15,7 @@ public class UserConfig {
     CommandLineRunner userCommandLineRunner(UserRepository userRepository) {
         return args -> {
             userRepository.save(
-                    new User("am2mcu", "am2mcu", "Armin", "Mazloumi", "armynm005@gmail.com")
+                    new Customer("am2mcu", "am2mcu", "Armin", "Mazloumi", "armynm005@gmail.com")
             );
         };
     }
