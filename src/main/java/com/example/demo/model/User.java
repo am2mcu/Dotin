@@ -4,30 +4,25 @@ import lombok.*;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users")
-@Getter @Setter @ToString @NoArgsConstructor @AllArgsConstructor
-public class User {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "user_role", discriminatorType = DiscriminatorType.STRING)
+public abstract class User {
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String username, password;
-    private String firstName, lastName;
     private String email;
 
-    public User(String username, String password, String firstName, String lastName, String email) {
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.email = email;
     }
 }
