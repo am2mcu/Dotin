@@ -5,9 +5,12 @@ import com.example.demo.repo.RoomRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,13 +25,20 @@ public class RoomService {
     }
 
     public List<Room> getRooms() {
-        logger.info("Rooms selected from DB");
-        return roomRepository.findAll();
-    }
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getAuthorities().stream().anyMatch(
+                authority -> authority.getAuthority().equals("ROLE_MANAGER") || authority.getAuthority().equals("ROLE_RECEPTIONIST")
+        )) {
+            logger.info("Rooms selected from DB");
+            return roomRepository.findAll();
+        } else if (authentication.getAuthorities().stream().anyMatch(
+                authority -> authority.getAuthority().equals("ROLE_CUSTOMER")
+        )) {
+            logger.info("Available Rooms selected from DB");
+            return roomRepository.getAvailableRooms();
+        }
 
-    public List<Room> getAvailableRooms() {
-        logger.info("Available Rooms selected from DB");
-        return roomRepository.getAvailableRooms();
+        return new ArrayList<>();
     }
 
     public List<Room> getReservedRooms() {
