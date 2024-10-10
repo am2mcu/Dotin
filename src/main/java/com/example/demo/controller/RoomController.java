@@ -26,7 +26,7 @@ public class RoomController {
     )
     @GetMapping()
     public List<Room> getRooms() {
-        return roomService.getAvailableRooms();
+        return roomService.getRooms();
     }
 
     @Operation(
