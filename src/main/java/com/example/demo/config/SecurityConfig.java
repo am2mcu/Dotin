@@ -4,6 +4,7 @@ import com.example.demo.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,7 +21,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests(authorize -> authorize
-                        .antMatchers("/", "/swagger-ui/index.html").permitAll()
+                        .antMatchers("/", "/swagger-ui/**").permitAll()
+                        .antMatchers(HttpMethod.GET, "/rooms/**").permitAll()
+                        .antMatchers("/rooms/**").hasRole("MANAGER")
                         .antMatchers("/requests/**").hasAnyRole("MANAGER", "RECEPTIONIST")
                         .anyRequest().authenticated())
                 .formLogin();
