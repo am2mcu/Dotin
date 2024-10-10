@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "customers")
-@DiscriminatorValue("Customer")
+@DiscriminatorValue("CUSTOMER")
 public class Customer extends User {
     private String firstName;
     private String lastName;

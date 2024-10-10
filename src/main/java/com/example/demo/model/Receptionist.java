@@ -12,6 +12,6 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(name = "receptionists")
-@DiscriminatorValue("Receptionist")
+@DiscriminatorValue("RECEPTIONIST")
 public class Receptionist extends User {
 }
