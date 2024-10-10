@@ -19,6 +19,8 @@ public abstract class User {
     private Long userId;
     private String username, password;
     private String email;
+    @Column(name = "user_role", insertable = false, updatable = false)
+    private String userRole;
 
     public User(String username, String password, String email) {
         this.username = username;
