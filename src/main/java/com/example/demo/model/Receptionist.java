@@ -14,4 +14,7 @@ import javax.persistence.Table;
 @Table(name = "receptionists")
 @DiscriminatorValue("RECEPTIONIST")
 public class Receptionist extends User {
+    public Receptionist(String username, String password, String email) {
+        super(username, password, email);
+    }
 }
