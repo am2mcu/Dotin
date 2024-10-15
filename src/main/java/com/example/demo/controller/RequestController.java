@@ -40,20 +40,20 @@ public class RequestController {
     }
 
     @Operation(
-            summary = "Accept request",
-            description = "Accept a room request"
+            summary = "Respond to a room request",
+            description = "Accept or decline a room request"
     )
-    @PostMapping("/{requestId}/accept")
-    public void acceptRequest(@PathVariable("requestId") Long requestId) {
-        requestService.acceptRequest(requestId);
-    }
-
-    @Operation(
-            summary = "Decline request",
-            description = "Decline a room request"
-    )
-    @PostMapping("/{requestId}/decline")
-    public void declineRequest(@PathVariable("requestId") Long requestId) {
-        requestService.declineRequest(requestId);
+    @PostMapping("/{requestId}/respond")
+    public void handleRequest(
+            @PathVariable("requestId") Long requestId,
+            @RequestParam("action") String action
+    ) {
+        if (action.equals("accept")) {
+            requestService.acceptRequest(requestId);
+        } else if (action.equals("decline")) {
+            requestService.declineRequest(requestId);
+        } else {
+            // TODO
+        }
     }
 }
