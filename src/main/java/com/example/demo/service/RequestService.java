@@ -1,9 +1,6 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Request;
-import com.example.demo.model.Reservation;
-import com.example.demo.model.Room;
-import com.example.demo.model.User;
+import com.example.demo.model.*;
 import com.example.demo.repo.RequestRepository;
 import com.example.demo.repo.ReservationRepository;
 import com.example.demo.repo.RoomRepository;
@@ -11,8 +8,12 @@ import com.example.demo.repo.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -28,17 +29,32 @@ public class RequestService {
     private UserRepository userRepository;
 
     public List<Request> getRequests() {
-        logger.info("Requests selected from DB");
-        return requestRepository.findAll();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getAuthorities().stream().anyMatch(
+                authority -> authority.getAuthority().equals("ROLE_MANAGER") || authority.getAuthority().equals("ROLE_RECEPTIONIST")
+        )) {
+            logger.info("Requests selected from DB");
+            return requestRepository.findAll();
+        } else if (authentication.getAuthorities().stream().anyMatch(
+                authority -> authority.getAuthority().equals("ROLE_CUSTOMER")
+        )) {
+            logger.info("User reservations selected from DB");
+
+            User user = userRepository.findByUsername(authentication.getName())
+                    .orElseThrow(() -> {throw new UsernameNotFoundException("Username not found");});
+            return requestRepository.findByUser(user);
+        }
+
+        return new ArrayList<>();
     }
     public void requestRoom(Long roomId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userRepository.findByUsername(authentication.getName())
+                .orElseThrow(() -> {throw new UsernameNotFoundException("Username not found");});
+
         Room room = roomRepository.findById(roomId).orElseThrow(() -> {
             logger.error("Room does not exists!");
             throw new IllegalStateException("Room does not exists!");
-        });
-        User user = userRepository.findById(1L).orElseThrow(() -> {
-            logger.error("User does not exists!");
-            throw new IllegalStateException("User does not exists!");
         });
 
         if (room.getStatus().equals("Available")) {
