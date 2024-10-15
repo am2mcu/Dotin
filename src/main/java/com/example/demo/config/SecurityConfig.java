@@ -69,6 +69,7 @@ public class SecurityConfig {
                 .csrf().disable()
                 .authorizeHttpRequests(authorize -> authorize
                         .antMatchers("/", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .antMatchers("/auth/**").permitAll()
                         .antMatchers(HttpMethod.GET, "/rooms/**").permitAll()
                         .antMatchers("/rooms/**").hasRole("MANAGER")
                         .antMatchers("/requests/**").hasAnyRole("MANAGER", "RECEPTIONIST")
