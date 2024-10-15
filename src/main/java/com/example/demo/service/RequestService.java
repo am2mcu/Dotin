@@ -41,16 +41,21 @@ public class RequestService {
             logger.info("User reservations selected from DB");
 
             User user = userRepository.findByUsername(authentication.getName())
-                    .orElseThrow(() -> {throw new UsernameNotFoundException("Username not found");});
+                    .orElseThrow(() -> {
+                        throw new UsernameNotFoundException("Username not found");
+                    });
             return requestRepository.findByUser(user);
         }
 
         return new ArrayList<>();
     }
+
     public void requestRoom(Long roomId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userRepository.findByUsername(authentication.getName())
-                .orElseThrow(() -> {throw new UsernameNotFoundException("Username not found");});
+                .orElseThrow(() -> {
+                    throw new UsernameNotFoundException("Username not found");
+                });
 
         Room room = roomRepository.findById(roomId).orElseThrow(() -> {
             logger.error("Room does not exists!");
@@ -72,8 +77,24 @@ public class RequestService {
             throw new IllegalStateException("Request does not exists!");
         });
 
-        logger.info("Request deleted");
-        requestRepository.deleteById(requestId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getAuthorities().stream().anyMatch(
+                authority -> authority.getAuthority().equals("ROLE_MANAGER") || authority.getAuthority().equals("ROLE_RECEPTIONIST")
+        )) {
+            logger.info("Request deleted");
+            requestRepository.deleteById(requestId);
+        } else if (authentication.getAuthorities().stream().anyMatch(
+                authority -> authority.getAuthority().equals("ROLE_CUSTOMER")
+        )) {
+            User user = request.getUser();
+            if (authentication.getName().equals(user.getUsername())) {
+                logger.info("Request deleted");
+                requestRepository.deleteById(requestId);
+            } else {
+                logger.error("Not authorized to remove request");
+                throw new IllegalStateException("Not authorized to remove request");
+            }
+        }
     }
 
     public void acceptRequest(Long requestId) {
