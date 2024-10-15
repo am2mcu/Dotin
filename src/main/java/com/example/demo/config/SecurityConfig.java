@@ -70,9 +70,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .antMatchers("/", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                         .antMatchers("/auth/**").permitAll()
-                        .antMatchers(HttpMethod.GET, "/rooms/**").permitAll()
-                        .antMatchers("/rooms/**").hasRole("MANAGER")
-                        .antMatchers("/requests/**").hasAnyRole("MANAGER", "RECEPTIONIST")
+
+                        .antMatchers(HttpMethod.POST, "/rooms/**").hasRole("MANAGER")
+                        .antMatchers(HttpMethod.DELETE, "/rooms/**").hasRole("MANAGER")
+                        .antMatchers(HttpMethod.PUT, "/rooms/**").hasRole("MANAGER")
+
+                        .antMatchers("/requests/**/respond").hasAnyRole("MANAGER", "RECEPTIONIST")
+
                         .anyRequest().authenticated())
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
