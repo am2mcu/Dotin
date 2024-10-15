@@ -38,6 +38,7 @@ public class AuthenticationService {
                 userDto.getFirstName(),
                 userDto.getLastName()
         );
+        user.setUserRole("CUSTOMER");
 
         return userRepository.save(user);
     }
