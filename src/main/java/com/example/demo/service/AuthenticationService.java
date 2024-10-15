@@ -33,7 +33,7 @@ public class AuthenticationService {
     public User signup(RegisterUserDto userDto) {
         User user = new Customer(
                 userDto.getUsername(),
-                userDto.getPassword(),
+                passwordEncoder.encode(userDto.getPassword()),
                 userDto.getEmail(),
                 userDto.getFirstName(),
                 userDto.getLastName()
