@@ -19,7 +19,10 @@ public class UserConfig {
     CommandLineRunner userCommandLineRunner(UserRepository userRepository) {
         return args -> {
             userRepository.save(
-                    new Customer("am2mcu", passwordEncoder.encode("am2mcu"), "Armin", "Mazloumi", "armynm005@gmail.com")
+                    new Customer("am2mcu", passwordEncoder.encode("am2mcu"), "armynm005@gmail.com", "Armin", "Mazloumi")
+            );
+            userRepository.save(
+                    new Customer("am2mcu2", passwordEncoder.encode("am2mcu2"), "armynm005@gmail.com", "Armin", "Mazloumi")
             );
             userRepository.save(
                     new Manager("a", passwordEncoder.encode("a"), "a@gmail.com")
